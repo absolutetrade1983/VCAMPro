@@ -149,7 +149,7 @@ fun AppDetailScreen(
         ) {
             WarningBar(
                 visible = !hasPermission,
-                text = { Text(text = "该应用尚未获取读取外部存储或访问外部存储的权限，设置可能无法生效，点击按钮打开应用详情页授予权限") },
+text = { Text(text = "This app does not have external storage permission. Settings may not work. Tap Open Settings to grant permission.") },
                 actions = {
                     TextButton(onClick = { AppUtils.launchAppDetailsSettings(packageInfo.applicationInfo.packageName) }) {
                         Text(text = "打开")
