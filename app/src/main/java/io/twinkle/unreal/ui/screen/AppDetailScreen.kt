@@ -281,7 +281,7 @@ text = { Text(text = "This app does not have external storage permission. Settin
                     onDismissRequest = { showDialog = false },
                     dismissButton = {
                         TextButton(onClick = { showDialog = false }) {
-                            Text(text = "取消")
+                            Text(text = "Cancel")
                         }
                     },
                     confirmButton = {
@@ -289,7 +289,7 @@ text = { Text(text = "This app does not have external storage permission. Settin
                             openSelectVideoLauncher.launch("video/*")
                             showDialog = false
                         }) {
-                            Text(text = "确定")
+                            Text(text = "Confirm")
                         }
                     }
                 )
