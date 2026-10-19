@@ -182,10 +182,11 @@ text = { Text(text = "This app does not have external storage permission. Settin
                         isEnable = false
                     )
                     Text(
-  text = "External Directory: " + Environment.getExternalStorageDirectory().path + "/Android/data/" + packageInfo.applicationInfo.packageName + "/files/unreal/",                   text = "外置目录: " + Environment.getExternalStorageDirectory().path + "/Android/data/" + packageInfo.applicationInfo.packageName + "/files/unreal/",
-                        modifier = Modifier.padding(start = 88.dp, end = 16.dp),
-                        fontSize = 13.sp,
-                        color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f)
+    text = "External Directory: ${Environment.getExternalStorageDirectory().path}/Android/data/${packageInfo.applicationInfo.packageName}/files/unreal/",
+    modifier = Modifier.padding(start = 88.dp, end = 16.dp),
+    fontSize = 13.sp,
+    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f)
+)
                     )
                 }
 
