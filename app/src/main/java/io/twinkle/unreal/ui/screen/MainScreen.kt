@@ -47,7 +47,7 @@ fun MainScreen(
     isActivated: Boolean = false
 ) {
     val pagerState = rememberPagerState(initialPage = 1) { 3 }
-    val items = listOf("应用", "主页", "设置")
+   val items = listOf("Apps", "Home", "Settings")
     val mainViewModel = viewModel<MainViewModel>()
 
     LaunchedEffect(key1 = Unit) {
