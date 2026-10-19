@@ -1,4 +1,4 @@
-}package io.twinkle.unreal.ui.page
+package io.twinkle.unreal.ui.page
 
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
