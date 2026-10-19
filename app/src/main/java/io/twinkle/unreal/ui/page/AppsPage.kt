@@ -77,7 +77,7 @@ fun AppsPage(activity: ComponentActivity, vm: AppsPageViewModel) {
         topBar = {
             LargeTopAppBar(
                 title = {
-                    Text(text = "应用 (${appList.size})")
+                    Text(text = "Apps (${appList.size})")
                 }, scrollBehavior = scrollBehavior,
                 colors = TopAppBarDefaults.largeTopAppBarColors(
                     containerColor = MaterialTheme.colorScheme.surface,
