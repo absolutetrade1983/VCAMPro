@@ -127,7 +127,7 @@ fun AppDetailScreen(
 
     Scaffold(topBar = {
         TopAppBar(
-            title = { Text(text = "应用配置") },
+            title = { Text(text = "App Configuration") },
             colors = TopAppBarDefaults.largeTopAppBarColors(
                 containerColor = MaterialTheme.colorScheme.surface,
                 scrolledContainerColor = MaterialTheme.colorScheme.surface
