@@ -1,10 +1,7 @@
-package io.twinkle.unreal.ui.page
+}package io.twinkle.unreal.ui.page
 
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.core.MutableTransitionState
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -18,14 +15,12 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
-import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Done
 import androidx.compose.material.icons.outlined.Delete
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -56,22 +51,23 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.blankj.utilcode.util.FileUtils
 import io.twinkle.unreal.BuildConfig
 import io.twinkle.unreal.R
 import io.twinkle.unreal.ui.viewmodel.MainViewModel
 import io.twinkle.unreal.util.toAbsoluteFilePath
 import java.io.File
-import java.net.URI
-
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomePage(vm: MainViewModel = viewModel(), isActivated: Boolean = false) {
+fun HomePage(
+    vm: MainViewModel = viewModel(),
+    isActivated: Boolean = false
+) {
     val uiState by vm.uiState.collectAsState()
     val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
     val context = LocalContext.current
     val globalVideo = File(uiState.globalVideoPath)
+
     Scaffold(
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
@@ -85,8 +81,9 @@ fun HomePage(vm: MainViewModel = viewModel(), isActivated: Boolean = false) {
                     scrolledContainerColor = MaterialTheme.colorScheme.surface
                 )
             )
-        }) { innerPadding ->
-        // DashBoard
+        }
+    ) { innerPadding ->
+
         Column(
             modifier = Modifier
                 .padding(
@@ -102,11 +99,15 @@ fun HomePage(vm: MainViewModel = viewModel(), isActivated: Boolean = false) {
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             Row(
-                Modifier
+                modifier = Modifier
                     .fillMaxWidth()
                     .height(100.dp)
                     .background(
-                        if (isActivated) MaterialTheme.colorScheme.primaryContainer else MaterialTheme.colorScheme.errorContainer,
+                        color = if (isActivated) {
+                            MaterialTheme.colorScheme.primaryContainer
+                        } else {
+                            MaterialTheme.colorScheme.errorContainer
+                        },
                         shape = RoundedCornerShape(16.dp)
                     ),
                 verticalAlignment = Alignment.CenterVertically
@@ -115,38 +116,57 @@ fun HomePage(vm: MainViewModel = viewModel(), isActivated: Boolean = false) {
                     modifier = Modifier
                         .fillMaxHeight()
                         .width(75.dp)
-                        .padding(8.dp), contentAlignment = Alignment.Center
+                        .padding(8.dp),
+                    contentAlignment = Alignment.Center
                 ) {
                     Icon(
-                        imageVector = if (isActivated) Icons.Filled.Done else Icons.Filled.Close,
-                        contentDescription = "isActive",
-                        tint = if (isActivated) MaterialTheme.colorScheme.onPrimaryContainer else MaterialTheme.colorScheme.onErrorContainer
+                        imageVector = if (isActivated) {
+                            Icons.Filled.Done
+                        } else {
+                            Icons.Filled.Close
+                        },
+                        contentDescription = "Activation status",
+                        tint = if (isActivated) {
+                            MaterialTheme.colorScheme.onPrimaryContainer
+                        } else {
+                            MaterialTheme.colorScheme.onErrorContainer
+                        }
                     )
                 }
+
                 Column {
                     Text(
-                        text = if (isActivated) "已激活" else "未激活",
+                        text = if (isActivated) "Activated" else "Not Activated",
                         fontSize = 15.sp,
-                        fontWeight = if (isActivated) FontWeight.Bold else FontWeight.Normal
+                        fontWeight = if (isActivated) {
+                            FontWeight.Bold
+                        } else {
+                            FontWeight.Normal
+                        }
                     )
+
                     Spacer(Modifier.height(3.dp))
+
                     Text(
-                        text = "版本: ${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE}) - ${BuildConfig.BUILD_TYPE}",
+                        text = "Version: ${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE}) - ${BuildConfig.BUILD_TYPE}",
                         fontSize = 13.sp
                     )
                 }
             }
 
-            var filePath by rememberSaveable { mutableStateOf("") }
+            var filePath by rememberSaveable {
+                mutableStateOf("")
+            }
+
             val openSelectVideoLauncher = rememberLauncherForActivityResult(
                 contract = ActivityResultContracts.GetContent(),
-                onResult = {//这里返回的是uri？
-                    it?.let { uri ->
-                        filePath = uri.toAbsoluteFilePath(context)
+                onResult = { uri ->
+                    uri?.let {
+                        filePath = it.toAbsoluteFilePath(context)
                         vm.handleFirstFrame(filePath)
                     }
-                })
-
+                }
+            )
 
             Box(
                 modifier = Modifier
@@ -162,12 +182,13 @@ fun HomePage(vm: MainViewModel = viewModel(), isActivated: Boolean = false) {
                     },
                 contentAlignment = Alignment.CenterStart
             ) {
-                Image(
+                androidx.compose.foundation.Image(
                     bitmap = uiState.globalVideoFirstFrame,
-                    contentDescription = "video first frame",
+                    contentDescription = "Video preview",
                     contentScale = ContentScale.Crop,
                     modifier = Modifier.fillMaxSize()
                 )
+
                 Box(
                     modifier = Modifier
                         .fillMaxSize()
@@ -175,7 +196,9 @@ fun HomePage(vm: MainViewModel = viewModel(), isActivated: Boolean = false) {
                             brush = Brush.horizontalGradient(
                                 listOf(
                                     MaterialTheme.colorScheme.tertiaryContainer,
-                                    MaterialTheme.colorScheme.tertiaryContainer.copy(alpha = 0.75f),
+                                    MaterialTheme.colorScheme.tertiaryContainer.copy(
+                                        alpha = 0.75f
+                                    ),
                                     Color.Transparent
                                 ),
                                 tileMode = TileMode.Decal
@@ -184,7 +207,11 @@ fun HomePage(vm: MainViewModel = viewModel(), isActivated: Boolean = false) {
                         )
                         .clip(RoundedCornerShape(16.dp))
                 )
-                Text(text = "选择全局视频", modifier = Modifier.padding(start = 32.dp))
+
+                Text(
+                    text = "Select Global Video",
+                    modifier = Modifier.padding(start = 32.dp)
+                )
 
                 if (uiState.globalVideoExists) {
                     IconButton(
@@ -193,15 +220,20 @@ fun HomePage(vm: MainViewModel = viewModel(), isActivated: Boolean = false) {
                             .align(Alignment.CenterEnd),
                         onClick = {
                             globalVideo.delete().run {
-                                vm.update { it.copy(globalVideoExists = false) }
+                                vm.update {
+                                    it.copy(globalVideoExists = false)
+                                }
                                 vm.handleFirstFrame()
                             }
-                        }) {
-                        Icon(imageVector = Icons.Outlined.Delete, contentDescription = "delete")
+                        }
+                    ) {
+                        Icon(
+                            imageVector = Icons.Outlined.Delete,
+                            contentDescription = "Delete video"
+                        )
                     }
                 }
             }
-
         }
     }
 }
