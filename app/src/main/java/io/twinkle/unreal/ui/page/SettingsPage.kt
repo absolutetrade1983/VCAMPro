@@ -1,4 +1,4 @@
-}package io.twinkle.unreal.ui.page
+package io.twinkle.unreal.ui.page
 
 import android.os.Environment
 import androidx.compose.foundation.layout.Box
