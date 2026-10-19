@@ -276,8 +276,8 @@ text = { Text(text = "This app does not have external storage permission. Settin
 
             if (showDialog) {
                 AlertDialog(
-                    title = { Text(text = "非相机应用") },
-                    text = { Text(text = "此应用非相机应用，选择虚拟视频可能对该应用没有任何效果，您确定要继续吗？") },
+                    title = { Text(text = "Non-Camera App") },
+                    text = { Text(text = "This is not a camera app. Selecting a virtual video may have no effect. Do you want to continue?") },
                     onDismissRequest = { showDialog = false },
                     dismissButton = {
                         TextButton(onClick = { showDialog = false }) {
