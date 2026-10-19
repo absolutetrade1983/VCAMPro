@@ -187,7 +187,6 @@ text = { Text(text = "This app does not have external storage permission. Settin
     fontSize = 13.sp,
     color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f)
 )
-                    )
                 }
 
                 SettingsSwitch(
