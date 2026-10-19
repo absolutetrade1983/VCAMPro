@@ -260,7 +260,7 @@ fun AppDetailScreen(
                             )
                             .clip(RoundedCornerShape(16.dp))
                     )
-                    Text(text = "选择视频", modifier = Modifier.padding(start = 32.dp))
+                    Text(text = "Select Video", modifier = Modifier.padding(start = 32.dp))
                     if (uiState.videoExits) {
                         IconButton(
                             modifier = Modifier
