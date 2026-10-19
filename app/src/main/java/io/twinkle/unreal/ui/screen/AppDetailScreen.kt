@@ -152,14 +152,14 @@ fun AppDetailScreen(
 text = { Text(text = "This app does not have external storage permission. Settings may not work. Tap Open Settings to grant permission.") },
                 actions = {
                     TextButton(onClick = { AppUtils.launchAppDetailsSettings(packageInfo.applicationInfo.packageName) }) {
-                        Text(text = "打开")
+                        Text(text = "Open Settings")
                     }
                 }
             )
 
             SettingsGroup(title = {
                 Text(
-                    text = "应用",
+                    text = "App",
                     fontSize = 15.sp,
                     modifier = Modifier.padding(start = 16.dp)
                 )
@@ -182,7 +182,7 @@ text = { Text(text = "This app does not have external storage permission. Settin
                         isEnable = false
                     )
                     Text(
-                        text = "外置目录: " + Environment.getExternalStorageDirectory().path + "/Android/data/" + packageInfo.applicationInfo.packageName + "/files/unreal/",
+  text = "External Directory: " + Environment.getExternalStorageDirectory().path + "/Android/data/" + packageInfo.applicationInfo.packageName + "/files/unreal/",                   text = "外置目录: " + Environment.getExternalStorageDirectory().path + "/Android/data/" + packageInfo.applicationInfo.packageName + "/files/unreal/",
                         modifier = Modifier.padding(start = 88.dp, end = 16.dp),
                         fontSize = 13.sp,
                         color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f)
@@ -191,8 +191,7 @@ text = { Text(text = "This app does not have external storage permission. Settin
 
                 SettingsSwitch(
                     state = uiState.enableUnreal,
-                    title = { Text(text = "启用") },
-                    icon = {
+  title = { Text(text = "Enable") },                  icon = {
                         Box(
                             modifier = Modifier.size(56.dp),
                             contentAlignment = Alignment.Center
